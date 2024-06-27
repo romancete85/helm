@@ -14,3 +14,5 @@ helm install <name release>
 To uninstall chart:
 
 helm delete <name release>
+
+---
