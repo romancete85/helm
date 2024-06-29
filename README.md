@@ -1,18 +1,32 @@
-# helm
+# DESAFÍO 15 - HELM CHART & GITOPS
 
-#Usage
-Helm must be installed to use the charts. Please refer to Helm’s documentation to get started.
+En este desafío, trabajaré con un Cluster de Kubernetes utilizando Microk8s instalado en una distribución Ubuntu 22.04 desde WSL. Adicionalmente, realizaré algunas pruebas en la página KillerKoda.
 
-Once Helm has been set up correctly, add the repo as follows:
+- Link del repositorio: [https://github.com/romancete85/eduit.git](https://github.com/romancete85/eduit.git)
+  - Carpeta: `Kubernetes/k8s/Desafio15`
 
-helm repo add <name repo> https://<username>.github.io/HELM/
-If you had already added this repo earlier, run helm repo update to retrieve the latest versions of the packages. You can then run helm search repo <alias> to see the charts.
+- Link del desafío: [Google Drive](https://drive.google.com/drive/folders/1WlyIx52iEO0rnW69mMm-OcRRWXxKTFNj?usp=drive_link)
 
-To install the chart:
+## Introducción
 
-helm install <name release>
-To uninstall chart:
+En este desafío utilizaremos herramientas de GitOps para gestionar cambios en archivos de manifiesto y automatizar despliegues desde un repositorio. Crearemos un paquete Helm chart a partir de los archivos de manifiesto utilizados en el desafío anterior e implementaremos una herramienta de GitOps en un entorno MicroK8s en WSL.
 
-helm delete <name release>
+## Requisitos Previos
 
----
+- MicroK8s instalado en WSL
+- Helm instalado
+- ArgoCD instalado y configurado en el cluster MicroK8s
+- Acceso a una cuenta de GitHub para almacenar los archivos
+
+## Configuración del Entorno
+
+### Instalación de MicroK8s
+
+Previamente realizado en el desafío anterior.
+
+### Instalación de Helm
+
+Instalar Helm:
+
+```sh
+sudo snap install helm --classic
