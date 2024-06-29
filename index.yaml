@@ -23,6 +23,16 @@ entries:
     version: 1.1.0
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-06-29T20:36:34.512259298Z"
+    description: A Helm chart alien-tetris for Kubernetes
+    digest: b29430a13574024b3763fc99562e1c72e8336709be91778b150516452c86679d
+    name: alien-tetris-chart
+    type: application
+    urls:
+    - https://github.com/romancete85/helm/releases/download/alien-tetris-chart-1.0.5/alien-tetris-chart-1.0.5.tgz
+    version: 1.0.5
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-06-29T20:29:47.203193305Z"
     description: A Helm chart alien-tetris for Kubernetes
     digest: b89257853aad308fcf8a7ee4f3da637dbe59768966e9f1304078aed3a2b6f634
@@ -61,4 +71,4 @@ entries:
     urls:
     - https://github.com/romancete85/helm/releases/download/alien-tetris-chart-1.0.0/alien-tetris-chart-1.0.0.tgz
     version: 1.0.0
-generated: "2024-06-29T20:29:47.203225836Z"
+generated: "2024-06-29T20:36:34.512298532Z"
