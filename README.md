@@ -28,28 +28,28 @@ Instalar Helm:
 
 ```sh
 sudo snap install helm --classic
-Instalación de ArgoCD
-Instalar ArgoCD:
+"Instalación de ArgoCD
+"Instalar ArgoCD:
 
-sh
-Copiar código
+
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
 Exponer el servidor de ArgoCD
 Con un Load Balancer:
 
-sh
-Copiar código
+```sh
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 Con un Port forwarding:
 
-sh
-Copiar código
+```sh
 sudo microk8s kubectl port-forward svc/argocd-server -n argocd 8080:443
+
 Obtener la contraseña de ArgoCD
-sh
-Copiar código
+
+```sh
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
 Cambio de Password
 Accede a la interfaz web de ArgoCD usando la IP obtenida del servicio de ArgoCD y la contraseña obtenida.
 
@@ -59,12 +59,11 @@ Service
 Helm Chart: Conversión a Paquete Helm
 Crear una carpeta helmcharts y dentro de ella ejecutar el comando:
 
-sh
-Copiar código
+```sh
 helm create alien-tetris-chart
-Estructura del Helm Chart
-bash
-Copiar código
+
+#Estructura del Helm Chart
+
 Helm/alien-tetris-chart
   ├── templates/
   │   ├── deployment.yaml
@@ -72,24 +71,28 @@ Helm/alien-tetris-chart
   │   ├── ingress.yaml
   ├── Chart.yaml
   ├── values.yaml
+
 Chequeo del Helm Chart
-sh
-Copiar código
+
+```sh
 sudo microk8s helm install --dry-run debug .
+
 Instalación en el Namespace Helm
-sh
-Copiar código
+
+```sh
 sudo microk8s helm install alien-tetris-chart --namespace default
+
 Configuración en GitHub Pages
 Configuración de nuevo repositorio, rama y habilitación de GitHub Pages según documentación oficial de Helm.
 
 Configuración del Repo y Actualización Manual
-sh
-Copiar código
+
+```sh
 helm repo index ./ --url https://romancete85.github.io/helm/
+
 Configuración del Pipeline Workflow File
-yaml
-Copiar código
+
+```yaml
 name: Release Charts
 
 on:
@@ -111,30 +114,29 @@ jobs:
       - name: Release Charts
         run: |
           cr upload --skip-existing
-ArgoCD
+
+###ArgoCD
 Configuración de ArgoCD
 Configurar la CLI de Argo CD:
 
-sh
-Copiar código
+```sh
 argocd login localhost:8080
 Configuración de una Aplicación con Argo CD
 Crear una app con Argo CD que apunte al Helm chart:
 
-sh
-Copiar código
+```sh
 argocd app create alien-tetris-argo --repo https://romancete85.github.io/helm/ --helm-chart alien-tetris-chart --revision 1.0.0 --dest-namespace default --dest-server https://kubernetes.default.svc
 Habilitación de Auto-sync y Self-healing
-sh
-Copiar código
+
+```sh
 argocd app set alien-tetris-argo --sync-policy automated --self-heal
 Sincronización de la Aplicación
-sh
-Copiar código
+
+```sh
 argocd app sync alien-tetris-argo
 Verificación de Estado
-sh
-Copiar código
+
+```sh
 kubectl get applications -n argocd
 Documentación y Problemas Encontrados
 Problema con el Despliegue del Ingress
