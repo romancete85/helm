@@ -26,28 +26,29 @@ Previamente realizado en el desafío anterior.
 ### Instalación de Helm
 Instalar Helm:
 
-```sh
+###
 sudo snap install helm --classic
+
 "Instalación de ArgoCD
 "Instalar ArgoCD:
 
-
+###
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 Exponer el servidor de ArgoCD
 Con un Load Balancer:
 
-```sh
+###
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 Con un Port forwarding:
 
-```sh
+###
 sudo microk8s kubectl port-forward svc/argocd-server -n argocd 8080:443
 
 Obtener la contraseña de ArgoCD
 
-```sh
+###
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 
 Cambio de Password
@@ -59,7 +60,7 @@ Service
 Helm Chart: Conversión a Paquete Helm
 Crear una carpeta helmcharts y dentro de ella ejecutar el comando:
 
-```sh
+###
 helm create alien-tetris-chart
 
 #Estructura del Helm Chart
@@ -74,12 +75,12 @@ Helm/alien-tetris-chart
 
 Chequeo del Helm Chart
 
-```sh
+###
 sudo microk8s helm install --dry-run debug .
 
 Instalación en el Namespace Helm
 
-```sh
+###
 sudo microk8s helm install alien-tetris-chart --namespace default
 
 Configuración en GitHub Pages
